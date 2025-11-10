@@ -351,22 +351,25 @@ class Engine:
             f.write(f"#SBATCH --nodes={num_nodes}\n")
             f.write(f"#SBATCH --ntasks-per-node={ppn}\n")
 
+
             # For tests only
             #f.write(f"#SBATCH --exclusive\n")
-            f.write("#SBATCH --account=IscrB_SWING\n")
 
-            f.write(f"#SBATCH --gres=tmpfs:0\n")
-            f.write(f"#SBATCH --time=01:00:00\n\n")
 
             #TODO: rimettere l'if (per qualche motivo non funge)
             #if os.environ.get("CRAB_SYSTEM") == "leonardo":
-            #TODO: far passare la partizione da config o env
-            f.write(f"#SBATCH --partition=boost_usr_prod\n")
-            self.log("[DEBUG] Detected CRAB_SYSTEM=leonardo. Adding partition to SBATCH script.")
+                #TODO: far passare la partizione da config o env
+                # f.write(f"#SBATCH --partition=boost_usr_prod\n")
+                # f.write("#SBATCH --account=IscrB_SWING\n")
+                # #TODO: capire in quali sistemi serve caricare i moduli, magari metterlo nell'env
+                # f.write("module purge\n")
+                # f.write("module load openmpi\n\n")
+                # self.log("[DEBUG] Detected CRAB_SYSTEM=leonardo. Adding partition to SBATCH script.")
 
-            #TODO: capire in quali sistemi serve caricare i moduli, magari metterlo nell'env
-            f.write("module purge\n")
-            f.write("module load openmpi\n\n")
+                #TODO: Capire il perche' di questi
+                # f.write(f"#SBATCH --gres=tmpfs:0\n")
+                # f.write(f"#SBATCH --time=01:00:00\n\n")
+
 
 
             venv_path = os.path.join(os.getcwd(), '.venv/bin/activate')
